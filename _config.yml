@@ -1,0 +1,6 @@
+# Leave this file as it is. It tells GitHub Pages to publish the charts unchanged.
+title: Charts
+exclude: [README.md]
+defaults:
+  - scope: { path: "" }
+    values: { layout: null }

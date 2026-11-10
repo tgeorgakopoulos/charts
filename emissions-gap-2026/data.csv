@@ -1,0 +1,20 @@
+series,year,value_gtco2e,low,high,note
+historical,2015,55.0,,,digitised from EGR 2026 Fig. ES.1 (±0.3)
+historical,2016,54.2,,,labelled in EGR 2026 Fig. ES.1
+historical,2017,55.0,,,digitised (±0.3)
+historical,2018,55.6,,,digitised (±0.3)
+historical,2019,55.9,,,digitised (±0.3)
+historical,2020,54.1,,,digitised (±0.3)
+historical,2021,56.2,,,digitised (±0.3)
+historical,2022,57.0,,,digitised (±0.3)
+historical,2023,57.6,,,digitised (±0.3)
+historical,2024,58.6,,,2025 value + 0.16 (EGR 2026 text)
+historical,2025,58.4,,,EGR 2026
+current_policies,2030,57,53,62,EGR 2026 Table ES.2
+current_policies,2035,55,52,61,EGR 2026 Table ES.2
+below_2c,2030,52,45,58,median = current policies minus ES.2 gap; range from % cuts on 2025
+below_2c,2035,45,29,53,same method
+lowest_1_5c_overshoot,2030,48,37,50,same method
+lowest_1_5c_overshoot,2035,33,23,41,same method
+old_1_5c_2025_report,2030,33,26,34,EGR 2025 Table ES.1 (retired pathway)
+old_1_5c_2025_report,2035,25,20,27,EGR 2025 Table ES.1 (retired pathway)
