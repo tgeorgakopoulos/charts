@@ -223,5 +223,89 @@ try{const p=new URLSearchParams(location.search).get("lang")||location.hash.slic
 setLang(lang);
 </script>
 
+<!-- Added to every chart page in the repo by build.js: back link, embed panel, auto-height messages. -->
+<style>
+.wrap{max-width:1100px}
+.cx-nav,.cx-embed{max-width:1100px;margin:0 auto;font-family:var(--sans)}
+.cx-nav{padding-bottom:8px}
+.cx-nav a{font-size:14px;font-weight:800;color:var(--fg);text-decoration:none}
+.cx-nav a:hover{text-decoration:underline}
+.cx-embed{padding-top:18px;display:flex;flex-direction:column;gap:10px}
+.cx-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.cx-btn{font:600 13px var(--sans);padding:7px 14px;border-radius:999px;border:1px solid var(--axis);background:var(--bg);color:var(--fg);cursor:pointer;text-decoration:none;display:inline-flex}
+.cx-btn:hover{border-color:var(--fg)}
+.cx-btn:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+.cx-btn[aria-expanded="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.cx-panel{display:flex;flex-direction:column;gap:8px;max-width:900px}
+.cx-panel label{font-size:12.5px;color:var(--muted)}
+.cx-code{width:100%;box-sizing:border-box;min-height:120px;font:12.5px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:var(--fg);background:var(--grid);border:1px solid var(--grid);border-radius:8px;padding:10px 12px;resize:vertical}
+.cx-done{font-size:12.5px;color:var(--muted)}
+</style>
+<nav class="cx-nav" id="cx-nav" hidden><a href="../">Charts!</a></nav>
+<div class="cx-embed" id="cx-embed" hidden>
+  <div class="cx-row">
+    <button type="button" class="cx-btn" id="cx-toggle" aria-expanded="false" aria-controls="cx-panel"></button>
+    <a class="cx-btn" id="cx-png" href="" download></a>
+    <a class="cx-btn" id="cx-csv" href="data.csv" download></a>
+  </div>
+  <div class="cx-panel" id="cx-panel" hidden>
+    <label for="cx-code" id="cx-label"></label>
+    <textarea class="cx-code" id="cx-code" readonly spellcheck="false"></textarea>
+    <div class="cx-row"><button type="button" class="cx-btn" id="cx-copy"></button><span class="cx-done" id="cx-done" role="status"></span></div>
+  </div>
+</div>
+<script>
+(function(){
+  var PNG = "emissions-gap-2026-el.png";
+  var embedded = false; try { embedded = window.self !== window.top; } catch (e) { embedded = true; }
+
+  // Tell the embedding page how tall the chart is, so the frame can fit it.
+  function send(){ try { parent.postMessage({chart: location.pathname, height: document.documentElement.scrollHeight}, "*"); } catch (e) {} }
+  if (embedded) { addEventListener("load", send); addEventListener("resize", send); if (window.ResizeObserver) new ResizeObserver(send).observe(document.body); return; }
+
+  var nav = document.getElementById("cx-nav"), box = document.getElementById("cx-embed");
+  document.body.insertBefore(nav, document.body.firstChild);
+  nav.hidden = false; box.hidden = false;
+
+  var L = {
+    el: {embed: "Ενσωμάτωση", png: "Λήψη PNG", csv: "Δεδομένα (CSV)", label: "Αντιγράψτε τον κώδικα και επικολλήστε τον στη σελίδα σας (π.χ. σε ένα μπλοκ «Προσαρμοσμένο HTML» του WordPress).", copy: "Αντιγραφή κώδικα", done: "Αντιγράφηκε."},
+    en: {embed: "Embed", png: "Download PNG", csv: "Data (CSV)", label: "Copy this code and paste it into your page (for example, a Custom HTML block in WordPress).", copy: "Copy code", done: "Copied."}
+  };
+  var $ = function(id){ return document.getElementById(id); };
+  var toggle = $("cx-toggle"), panel = $("cx-panel"), code = $("cx-code"), done = $("cx-done");
+
+  function lang(){ return document.documentElement.lang === "en" ? "en" : "el"; }
+  function snippet(){
+    var l = lang();
+    var url = location.origin + location.pathname + (l === "en" ? "#en" : "");
+    var title = ($("t-title") && $("t-title").textContent) || document.title;
+    title = title.replace(/&/g, "&amp;").replace(/"/g, "&quot;");
+    var h = 800; // starting height; the script below then fits the frame to the chart exactly
+    return '<iframe src="' + url + '" title="' + title + '" loading="lazy" style="width:100%;height:' + h + 'px;border:0"></iframe>\n' +
+      '<script>addEventListener("message",function(e){if(!e.data||!e.data.height)return;document.querySelectorAll("iframe").forEach(function(f){if(f.contentWindow===e.source)f.style.height=e.data.height+"px"})});<\/script>';
+  }
+  function labels(){
+    var t = L[lang()];
+    toggle.textContent = t.embed; $("cx-png").textContent = t.png; $("cx-csv").textContent = t.csv;
+    $("cx-label").textContent = t.label; $("cx-copy").textContent = t.copy;
+    $("cx-png").href = PNG.replace("-el.png", "-" + lang() + ".png");
+    code.value = snippet(); done.textContent = "";
+  }
+  toggle.addEventListener("click", function(){
+    var open = panel.hidden; panel.hidden = !open; toggle.setAttribute("aria-expanded", String(open));
+    if (open) { code.value = snippet(); code.focus(); code.select(); }
+  });
+  code.addEventListener("focus", function(){ code.select(); });
+  $("cx-copy").addEventListener("click", function(){
+    var ok = function(){ done.textContent = L[lang()].done; };
+    code.select();
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(code.value).then(ok, function(){ try { document.execCommand("copy"); ok(); } catch (e) {} });
+    else { try { document.execCommand("copy"); ok(); } catch (e) {} }
+  });
+  new MutationObserver(labels).observe(document.documentElement, {attributes: true, attributeFilter: ["lang"]});
+  labels();
+})();
+</script>
+
 </body>
 </html>
