@@ -1,0 +1,11 @@
+president,term,trades_in_office,approximate,note_el,note_en
+"Jimmy Carter",1977–81,0,no,"",""
+"Ronald Reagan",1981–89,0,no,"",""
+"George H.W. Bush",1989–93,0,no,"",""
+"Bill Clinton",1993–2001,0,no,"",""
+"George W. Bush",2001–09,0,no,"",""
+"Barack Obama",2009–17,0,no,"",""
+"Donald Trump (1st term)",2017–21,86,no,"Μόνο το 2017","2017 only"
+"Joe Biden",2021–25,13,no,"Όλη η θητεία","Whole term"
+"Donald Trump (2nd term)",2025–,28700,yes,"Ιαν. 2025 – Ιούν. 2026","Jan. 2025 – June 2026"
+# Sources: Bloomberg analysis of Trump's financial disclosures via Yahoo Finance (Sep 2026; ~28,700 trades Jan 2025-Jun 2026); 2025 annual disclosure via ABC News and Bloomberg Government (Jul 2026), incl. Biden 13 and Trump 2017 86; Associated Press (May 2026) on earlier presidents' blind trusts, sold holdings or funds.
