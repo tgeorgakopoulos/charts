@@ -28,9 +28,11 @@ button,select,input{font:inherit;color:inherit}
 
 .shell{max-width:1180px;margin:0 auto}
 header.hero{padding:34px 0 18px;display:grid;gap:10px}
-.kicker{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--t);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.kicker .dot{width:6px;height:6px;border-radius:50%;background:var(--c)}
-h1{font-size:clamp(26px,4.6vw,44px);line-height:1.08;font-weight:800;letter-spacing:-.02em;margin:0;max-width:22ch;text-wrap:balance;color:var(--p)}
+.kicker{font-size:clamp(22px,3.6vw,34px);font-weight:800;letter-spacing:-.015em;line-height:1.12;color:var(--t);display:flex;align-items:center;gap:6px 14px;flex-wrap:wrap}
+.kicker #kick2{color:var(--p);font-weight:700}
+.kicker .lang{align-self:flex-start}
+.kicker .dot{width:9px;height:9px;border-radius:50%;background:var(--c)}
+h1{font-size:clamp(20px,3vw,28px);line-height:1.08;font-weight:800;letter-spacing:-.02em;margin:0;max-width:22ch;text-wrap:balance;color:var(--p)}
 .dek{margin:0;color:var(--muted);font-size:16px;max-width:68ch}
 .lang{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;margin-left:auto}
 .lang button{background:none;border:0;padding:5px 10px;font-size:12px;font-weight:700;letter-spacing:.05em;color:var(--muted);cursor:pointer}
@@ -89,7 +91,9 @@ article.q{display:grid;grid-template-columns:54px minmax(0,1fr);gap:4px 14px;pad
 .qt.clamp{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .more{background:none;border:0;padding:0;font-size:12.5px;color:var(--p);text-decoration:underline;text-underline-offset:2px;cursor:pointer;margin-top:2px}
 .body{grid-column:2;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px 34px;margin-top:14px;align-items:start}
-.foot{grid-column:2;margin-top:10px;font-size:12px;color:var(--faint);display:flex;flex-wrap:wrap;gap:4px 14px}
+.foot{grid-column:2;margin-top:10px;font-size:12px;color:var(--faint);display:flex;flex-wrap:wrap;gap:4px 14px;align-items:center}
+.det{margin-left:auto;display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--p);text-decoration:none;border:1px solid var(--p);border-radius:999px;padding:5px 13px}
+.det:hover{background:var(--p);color:#fff}
 mark{background:var(--ctint);color:inherit;border-radius:3px;padding:0 1px}
 .empty{font-size:13.5px;color:var(--muted);background:var(--soft);border-radius:8px;padding:12px 14px}
 
@@ -209,29 +213,29 @@ mark{background:var(--ctint);color:inherit;border-radius:3px;padding:0 1px}
 
 <script>
 const YEARS={1:2002,2:2004,4:2008,5:2010,10:2021,11:2023};
-const CN={el:{AT:"Αυστρία",BE:"Βέλγιο",BG:"Βουλγαρία",CH:"Ελβετία",CY:"Κύπρος",DE:"Γερμανία",EE:"Εσθονία",ES:"Ισπανία",FI:"Φινλανδία",FR:"Γαλλία",GB:"Ηνωμένο Βασίλειο",GR:"Ελλάδα",HR:"Κροατία",HU:"Ουγγαρία",IE:"Ιρλανδία",IL:"Ισραήλ",IS:"Ισλανδία",IT:"Ιταλία",LT:"Λιθουανία",LV:"Λετονία",ME:"Μαυροβούνιο",NL:"Ολλανδία",NO:"Νορβηγία",PL:"Πολωνία",PT:"Πορτογαλία",RS:"Σερβία",SE:"Σουηδία",SI:"Σλοβενία",SK:"Σλοβακία",UA:"Ουκρανία",ESS:"Όλες οι χώρες του ESS"},
- en:{AT:"Austria",BE:"Belgium",BG:"Bulgaria",CH:"Switzerland",CY:"Cyprus",DE:"Germany",EE:"Estonia",ES:"Spain",FI:"Finland",FR:"France",GB:"United Kingdom",GR:"Greece",HR:"Croatia",HU:"Hungary",IE:"Ireland",IL:"Israel",IS:"Iceland",IT:"Italy",LT:"Lithuania",LV:"Latvia",ME:"Montenegro",NL:"Netherlands",NO:"Norway",PL:"Poland",PT:"Portugal",RS:"Serbia",SE:"Sweden",SI:"Slovenia",SK:"Slovakia",UA:"Ukraine",ESS:"All ESS countries"}};
-const SEGS={el:[["all","Όλος ο πληθυσμός"],["Φύλο",[["sx1","Άνδρες"],["sx2","Γυναίκες"]]],["Ηλικία",[["ag1","15–29"],["ag2","30–44"],["ag3","45–64"],["ag4","65+"]]],["Εκπαίδευση",[["ed1","Έως υποχρεωτική"],["ed2","Δευτεροβάθμια"],["ed3","Ανώτερη / ανώτατη"]]],["Αυτοτοποθέτηση",[["lr1","Αριστερά (0–3)"],["lr2","Κέντρο (4–6)"],["lr3","Δεξιά (7–10)"]]],["Τόπος κατοικίας",[["dm1","Μεγάλη πόλη / προάστια"],["dm2","Μικρότερη πόλη"],["dm3","Χωριό / ύπαιθρος"]]],["Εισόδημα νοικοκυριού",[["in1","Χαμηλό (1ο–3ο δεκατημόριο)"],["in2","Μεσαίο (4ο–7ο)"],["in3","Υψηλό (8ο–10ο)"]]]],
- en:[["all","Whole population"],["Sex",[["sx1","Men"],["sx2","Women"]]],["Age",[["ag1","15–29"],["ag2","30–44"],["ag3","45–64"],["ag4","65+"]]],["Education",[["ed1","Up to lower secondary"],["ed2","Upper secondary"],["ed3","Post-secondary / tertiary"]]],["Left–right",[["lr1","Left (0–3)"],["lr2","Centre (4–6)"],["lr3","Right (7–10)"]]],["Place of residence",[["dm1","Big city / suburbs"],["dm2","Town or small city"],["dm3","Village / countryside"]]],["Household income",[["in1","Low (deciles 1–3)"],["in2","Middle (4–7)"],["in3","High (8–10)"]]]]};
+const CN={el:{AT:"Αυστρία",BE:"Βέλγιο",BG:"Βουλγαρία",CH:"Ελβετία",CY:"Κύπρος",DE:"Γερμανία",EE:"Εσθονία",ES:"Ισπανία",FI:"Φινλανδία",FR:"Γαλλία",GB:"Ηνωμένο Βασίλειο",GR:"Ελλάδα",HR:"Κροατία",HU:"Ουγγαρία",IE:"Ιρλανδία",IL:"Ισραήλ",IS:"Ισλανδία",IT:"Ιταλία",LT:"Λιθουανία",LV:"Λετονία",ME:"Μαυροβούνιο",NL:"Ολλανδία",NO:"Νορβηγία",PL:"Πολωνία",PT:"Πορτογαλία",RS:"Σερβία",SE:"Σουηδία",SI:"Σλοβενία",SK:"Σλοβακία",UA:"Ουκρανία",ESS:"Μέσος όρος ESS"},
+ en:{AT:"Austria",BE:"Belgium",BG:"Bulgaria",CH:"Switzerland",CY:"Cyprus",DE:"Germany",EE:"Estonia",ES:"Spain",FI:"Finland",FR:"France",GB:"United Kingdom",GR:"Greece",HR:"Croatia",HU:"Hungary",IE:"Ireland",IL:"Israel",IS:"Iceland",IT:"Italy",LT:"Lithuania",LV:"Latvia",ME:"Montenegro",NL:"Netherlands",NO:"Norway",PL:"Poland",PT:"Portugal",RS:"Serbia",SE:"Sweden",SI:"Slovenia",SK:"Slovakia",UA:"Ukraine",ESS:"ESS average"}};
+const SEGS={el:[["all","Όλος ο πληθυσμός"],["Φύλο",[["sx1","Άνδρες"],["sx2","Γυναίκες"]]],["Ηλικία",[["ag1","15–29"],["ag2","30–44"],["ag3","45–64"],["ag4","65+"]]],["Εκπαίδευση",[["ed1","Έως υποχρεωτική"],["ed2","Δευτεροβάθμια"],["ed3","Ανώτερη / ανώτατη"]]],["Αυτοτοποθέτηση",[["lr1","Αριστερά (0–3)"],["lr2","Κέντρο (4–6)"],["lr3","Δεξιά (7–10)"]]],["Τόπος κατοικίας",[["dm1","Μεγάλη πόλη / προάστια"],["dm2","Μικρότερη πόλη"],["dm3","Χωριό / ύπαιθρος"]]],["Εισόδημα νοικοκυριού",[["in1","Χαμηλό (1ο–3ο δεκατημόριο)"],["in2","Μεσαίο (4ο–7ο)"],["in3","Υψηλό (8ο–10ο)"]]],["Ελλάδα",[["gnw","Γυναίκες Βορείου Ελλάδας"]]]],
+ en:[["all","Whole population"],["Sex",[["sx1","Men"],["sx2","Women"]]],["Age",[["ag1","15–29"],["ag2","30–44"],["ag3","45–64"],["ag4","65+"]]],["Education",[["ed1","Up to lower secondary"],["ed2","Upper secondary"],["ed3","Post-secondary / tertiary"]]],["Left–right",[["lr1","Left (0–3)"],["lr2","Centre (4–6)"],["lr3","Right (7–10)"]]],["Place of residence",[["dm1","Big city / suburbs"],["dm2","Town or small city"],["dm3","Village / countryside"]]],["Household income",[["in1","Low (deciles 1–3)"],["in2","Middle (4–7)"],["in3","High (8–10)"]]],["Greece",[["gnw","Women in Northern Greece"]]]]};
 const T={
- el:{kick:"Ευρωπαϊκή Κοινωνική Έρευνα",kick2:"11ος γύρος · 2023–24",title:"Όλες οι ερωτήσεις, όλες οι απαντήσεις",
-   dek:"Οι απαντήσεις των ενηλίκων σε κάθε ερώτηση του πιο πρόσφατου γύρου της Ευρωπαϊκής Κοινωνικής Έρευνας. Επιλέξτε χώρα, πληθυσμιακή ομάδα και χώρα σύγκρισης· η αναζήτηση βρίσκει ερωτήσεις με λέξη ή αριθμό.",
+ el:{kick:"European Social Survey",kick2:"11ος γύρος · 2023–24",title:"Όλες οι ερωτήσεις, όλες οι απαντήσεις",
+   dek:"Οι απαντήσεις των ενηλίκων σε κάθε ερώτηση του πιο πρόσφατου γύρου του European Social Survey (ESS). Επιλέξτε χώρα, πληθυσμιακή ομάδα και χώρα σύγκρισης· η αναζήτηση βρίσκει ερωτήσεις με λέξη ή αριθμό.",
    cty:"Χώρα",seg:"Ομάδα",cmp:"Σύγκριση με",search:"Αναζήτηση ερώτησης ή αριθμού (π.χ. B6, εμπιστοσύνη)",none:"Χωρίς σύγκριση",whole:"Όλος ο πληθυσμός της χώρας",
    found:n=>`${n} ερωτήσεις`,qs:n=>`${n} ερωτήσεις`,base:"Βάση",dk:"Δεν ξέρω",mean:"Μέσος όρος",median:"Διάμεσος",more:"Ολόκληρη η διατύπωση",less:"Λιγότερα",
    trend:"Διαχρονικά · όλος ο πληθυσμός",small:"Πολύ μικρό δείγμα για αυτή την ομάδα.",noq:"Η ερώτηση δεν τέθηκε σε αυτή τη χώρα.",nores:"Καμία ερώτηση δεν ταιριάζει στην αναζήτηση.",
-   multi:"% όσων απάντησαν· επιτρεπόταν περισσότερες από μία επιλογές",party:"Τα κόμματα διαφέρουν ανά χώρα· η σύγκριση δεν εμφανίζεται",other:"Άλλο",loading:"Φόρτωση δεδομένων…",
+   det:"Δείτε περισσότερα",multi:"% όσων απάντησαν· επιτρεπόταν περισσότερες από μία επιλογές",party:"Τα κόμματα διαφέρουν ανά χώρα· η σύγκριση δεν εμφανίζεται",other:"Άλλο",loading:"Φόρτωση δεδομένων…",
    resp:"ερωτηθέντες",sect:"Ενότητα",
-   col:`<p><b>Πηγή:</b> European Social Survey European Research Infrastructure (ESS ERIC), <a href="https://www.europeansocialsurvey.org/data-portal" target="_blank" rel="noopener">ESS11 integrated file, έκδοση 4.2</a> (2026) και προηγούμενοι γύροι για τη διαχρονική εικόνα (2002, 2004, 2008, 2010, 2021). Οι αριθμοί των ερωτήσεων είναι του ερωτηματολογίου του 11ου γύρου. Η πλήρης διατύπωση κάθε ερώτησης και οι απαντήσεις είναι του επίσημου ελληνικού ερωτηματολογίου· στις άλλες χώρες οι ερωτήσεις αναφέρονταν στη δική τους χώρα. Οι σύντομοι τίτλοι είναι δικοί μας.</p><p><b>Μέθοδος:</b> Ποσοστά σταθμισμένα με το βάρος μεταστρωμάτωσης (pspwght) για κάθε χώρα· «Όλες οι χώρες» με το βάρος ανάλυσης (anweight), που λαμβάνει υπόψη και τον πληθυσμό κάθε χώρας. Τα ποσοστά υπολογίζονται επί όσων έδωσαν έγκυρη απάντηση· όσοι αρνήθηκαν ή δεν απάντησαν δεν περιλαμβάνονται, και το «Δεν ξέρω» αναφέρεται χωριστά. Ερωτήσεις που τέθηκαν μόνο σε μέρος του δείγματος έχουν ως βάση όσους ρωτήθηκαν. Ομάδες με λιγότερους από 30 ερωτηθέντες δεν εμφανίζονται. Οι πειραματικές ερωτήσεις για την ενέργεια (C34–C42, I1–I9), που τέθηκαν σε τυχαία υποσύνολα, και τα στοιχεία συνέντευξης δεν περιλαμβάνονται.</p>`},
+   col:`<p><b>Πηγή:</b> European Social Survey European Research Infrastructure (ESS ERIC), <a href="https://www.europeansocialsurvey.org/data-portal" target="_blank" rel="noopener">ESS11 integrated file, έκδοση 4.2</a> (2026) και προηγούμενοι γύροι για τη διαχρονική εικόνα (2002, 2004, 2008, 2010, 2021). Οι αριθμοί των ερωτήσεων είναι του ερωτηματολογίου του 11ου γύρου. Η πλήρης διατύπωση κάθε ερώτησης και οι απαντήσεις είναι του επίσημου ελληνικού ερωτηματολογίου· στις άλλες χώρες οι ερωτήσεις αναφέρονταν στη δική τους χώρα. Οι σύντομοι τίτλοι είναι δικοί μας.</p><p><b>Μέθοδος:</b> Ποσοστά σταθμισμένα με το βάρος μεταστρωμάτωσης (pspwght) για κάθε χώρα· «Όλες οι χώρες» με το βάρος ανάλυσης (anweight), που λαμβάνει υπόψη και τον πληθυσμό κάθε χώρας. Τα ποσοστά υπολογίζονται επί όσων έδωσαν έγκυρη απάντηση· όσοι αρνήθηκαν ή δεν απάντησαν δεν περιλαμβάνονται, και το «Δεν ξέρω» αναφέρεται χωριστά. Ερωτήσεις που τέθηκαν μόνο σε μέρος του δείγματος έχουν ως βάση όσους ρωτήθηκαν. Ομάδες με λιγότερους από 30 ερωτηθέντες δεν εμφανίζονται. Η ομάδα «Γυναίκες Βορείου Ελλάδας» περιλαμβάνει τις γυναίκες ερωτώμενες στις περιφέρειες Ανατολικής Μακεδονίας και Θράκης, Κεντρικής Μακεδονίας και Δυτικής Μακεδονίας. Οι πειραματικές ερωτήσεις για την ενέργεια (C34–C42, I1–I9), που τέθηκαν σε τυχαία υποσύνολα, και τα στοιχεία συνέντευξης δεν περιλαμβάνονται.</p>`},
  en:{kick:"European Social Survey",kick2:"Round 11 · 2023–24",title:"Every question, every answer",
    dek:"How adults answered every question in the latest round of the European Social Survey. Choose a country, a population group and a country to compare with; search finds questions by word or number.",
    cty:"Country",seg:"Group",cmp:"Compare with",search:"Search a question or number (e.g. B6, trust)",none:"No comparison",whole:"Country’s whole population",
    found:n=>`${n} questions`,qs:n=>`${n} questions`,base:"Base",dk:"Don’t know",mean:"Mean",median:"Median",more:"Full wording",less:"Less",
    trend:"Over time · whole population",small:"Sample too small for this group.",noq:"Not asked in this country.",nores:"No question matches the search.",
-   multi:"% of respondents; more than one answer allowed",party:"Parties differ by country; no comparison shown",other:"Other",loading:"Loading data…",
+   det:"See more",multi:"% of respondents; more than one answer allowed",party:"Parties differ by country; no comparison shown",other:"Other",loading:"Loading data…",
    resp:"respondents",sect:"Section",
-   col:`<p><b>Source:</b> European Social Survey European Research Infrastructure (ESS ERIC), <a href="https://www.europeansocialsurvey.org/data-portal" target="_blank" rel="noopener">ESS11 integrated file, edition 4.2</a> (2026), and earlier rounds for change over time (2002, 2004, 2008, 2010, 2021). Question numbers follow the Round 11 questionnaire.</p><p><b>Method:</b> Percentages weighted with the post-stratification weight (pspwght) within each country; “All countries” uses the analysis weight (anweight), which also accounts for each country’s population. Percentages are of valid answers; refusals and non-answers are excluded and “Don’t know” is reported separately. Questions asked of part of the sample use those asked as the base. Groups with fewer than 30 respondents are not shown. The split-ballot energy experiments (C34–C42, I1–I9) and interview administration items are not included.</p>`}
+   col:`<p><b>Source:</b> European Social Survey European Research Infrastructure (ESS ERIC), <a href="https://www.europeansocialsurvey.org/data-portal" target="_blank" rel="noopener">ESS11 integrated file, edition 4.2</a> (2026), and earlier rounds for change over time (2002, 2004, 2008, 2010, 2021). Question numbers follow the Round 11 questionnaire.</p><p><b>Method:</b> Percentages weighted with the post-stratification weight (pspwght) within each country; “All countries” uses the analysis weight (anweight), which also accounts for each country’s population. Percentages are of valid answers; refusals and non-answers are excluded and “Don’t know” is reported separately. Questions asked of part of the sample use those asked as the base. Groups with fewer than 30 respondents are not shown. “Women in Northern Greece” are women respondents in the regions of Eastern Macedonia and Thrace, Central Macedonia and Western Macedonia. The split-ballot energy experiments (C34–C42, I1–I9) and interview administration items are not included.</p>`}
 };
-let L="el",META=null,cache={},state={cty:"GR",seg:"all",cmp:"ESS",q:""};
+let L=(()=>{try{const l=localStorage.getItem("ess-lang");return l==="en"?"en":"el"}catch(e){return "el"}})(),META=null,cache={},state={cty:"GR",seg:"all",cmp:"ESS",q:""};
 const $=id=>document.getElementById(id);
 const fmt=(v,d=0)=>(v).toLocaleString(L==="el"?"el-GR":"en-GB",{minimumFractionDigits:d,maximumFractionDigits:d});
 const pct=x=>x==null?"–":(x>=995?fmt(x/10):x<5&&x>0?"<1":fmt(Math.round(x/10)))+"%";
@@ -249,11 +253,13 @@ function controls(){
   $("cty").innerHTML=ccs.map(c=>`<option value="${c}">${CN[L][c]}</option>`).join("");$("cty").value=state.cty;
   const s=$("seg");s.innerHTML="";
   for(const [g,items] of SEGS[L]){if(typeof items==="string"){s.append(new Option(items,g));continue}
+    if((g==="Ελλάδα"||g==="Greece")&&state.cty!=="GR")continue;
     const og=document.createElement("optgroup");og.label=g;for(const [k,n] of items)og.append(new Option(n,k));s.append(og)}
   s.value=state.seg;cmpOptions();
 }
 function cmpOptions(){
   const t=T[L],c=$("cmp");c.innerHTML="";
+  if(state.seg==="gnw"){c.append(new Option(t.whole,"WHOLE"));c.append(new Option(t.none,"NONE"));if(state.cmp!=="NONE")state.cmp="WHOLE";c.value=state.cmp;return}
   c.append(new Option(CN[L].ESS,"ESS"));
   if(state.seg!=="all")c.append(new Option(t.whole,"WHOLE"));
   c.append(new Option(t.none,"NONE"));
@@ -346,7 +352,7 @@ async function render(){
       const tr=D.t[q.id]&&R&&R.all?trendChart(q,cats,D.t[q.id],R.all):"";
       const text=tx(q,"text")||"";
       html+=`<article class="q" id="${q.id}"><div class="qn"><a href="#${q.id}">${q.id}</a></div><div><div class="qh"><h3>${hl(tx(q,"label"))}</h3></div>${text?`<p class="qt">${hl(text)}</p>`:""}</div>
-        <div class="body"><div>${chart}</div>${tr}</div>${foot.length?`<div class="foot">${foot.map(f=>`<span>${f}</span>`).join("")}</div>`:""}</article>`;
+        <div class="body"><div>${chart}</div>${tr}</div><div class="foot">${foot.map(f=>`<span>${f}</span>`).join("")}${q.type!=="party"?`<a class="det" href="q.html#${q.id}" target="_blank" rel="noopener">${t.det} ↗</a>`:""}</div></article>`;
     }
     html+=`</section>`;
   }
@@ -375,17 +381,17 @@ function setTop(){document.documentElement.style.setProperty("--top",barH()+"px"
 new ResizeObserver(setTop).observe($("bar"));
 
 $("sum").onclick=()=>{const o=$("bar").classList.toggle("open");$("sum").setAttribute("aria-expanded",o)};
-$("cty").onchange=e=>{state.cty=e.target.value;cmpOptions();render()};
-$("seg").onchange=e=>{state.seg=e.target.value;cmpOptions();render()};
+$("cty").onchange=e=>{state.cty=e.target.value;if(state.seg==="gnw"&&state.cty!=="GR")state.seg="all";controls();render()};
+$("seg").onchange=e=>{const was=state.seg;state.seg=e.target.value;if(was==="gnw"&&state.seg!=="gnw"&&state.cmp==="WHOLE")state.cmp="ESS";cmpOptions();render()};
 $("cmp").onchange=e=>{state.cmp=e.target.value;render()};
 let qt;$("q").oninput=e=>{clearTimeout(qt);qt=setTimeout(()=>{state.q=e.target.value;render()},160)};
-function setLang(l){L=l;$("b-el").setAttribute("aria-pressed",l==="el");$("b-en").setAttribute("aria-pressed",l==="en");controls();render()}
+function setLang(l){L=l;try{localStorage.setItem("ess-lang",l)}catch(e){}$("b-el").setAttribute("aria-pressed",l==="el");$("b-en").setAttribute("aria-pressed",l==="en");controls();render()}
 $("b-el").onclick=()=>setLang("el");$("b-en").onclick=()=>setLang("en");
 window.addEventListener("scroll",()=>$("toTop").classList.toggle("on",scrollY>900),{passive:true});
 $("toTop").onclick=()=>scrollTo({top:0,behavior:"smooth"});
 (async()=>{
   META=await (await fetch("meta.json")).json();
-  controls();await render();setTop();
+  $("b-el").setAttribute("aria-pressed",L==="el");$("b-en").setAttribute("aria-pressed",L==="en");controls();await render();setTop();
   try{const h=location.hash.slice(1);if(h){const el=document.getElementById(h);if(el)el.scrollIntoView()}}catch(e){}
 })();
 </script>
