@@ -241,7 +241,7 @@ const fmt=(v,d=0)=>(v).toLocaleString(L==="el"?"el-GR":"en-GB",{minimumFractionD
 const pct=x=>x==null?"–":(x>=995?fmt(x/10):x<5&&x>0?"<1":fmt(Math.round(x/10)))+"%";
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const tx=(q,k)=>(L==="el"&&q[k+"_el"])||q[k];
-async function load(cc){if(!cache[cc]){const r=await fetch(`d/${cc}.json`);cache[cc]=await r.json()}return cache[cc]}
+async function load(cc){if(!cache[cc]){const r=await fetch(`d/${cc}.json?v=20261125c`,{cache:"no-cache"});cache[cc]=await r.json()}return cache[cc]}
 
 function controls(){
   const t=T[L];
@@ -390,7 +390,7 @@ $("b-el").onclick=()=>setLang("el");$("b-en").onclick=()=>setLang("en");
 window.addEventListener("scroll",()=>$("toTop").classList.toggle("on",scrollY>900),{passive:true});
 $("toTop").onclick=()=>scrollTo({top:0,behavior:"smooth"});
 (async()=>{
-  META=await (await fetch("meta.json")).json();
+  META=await (await fetch("meta.json?v=20261125c",{cache:"no-cache"})).json();
   $("b-el").setAttribute("aria-pressed",L==="el");$("b-en").setAttribute("aria-pressed",L==="en");controls();await render();setTop();
   try{const h=location.hash.slice(1);if(h){const el=document.getElementById(h);if(el)el.scrollIntoView()}}catch(e){}
 })();

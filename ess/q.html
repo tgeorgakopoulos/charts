@@ -273,9 +273,9 @@ let rw=0;new ResizeObserver(()=>{const w=Math.round($("c-rank").getBoundingClien
 (async()=>{
   setLang(L);
   let id="A4";try{const h=location.hash.slice(1);if(h)id=h}catch(e){}
-  META=await (await fetch("meta.json")).json();
+  META=await (await fetch("meta.json?v=20261125c",{cache:"no-cache"})).json();
   Q=META.questions.find(q=>q.id===id)||META.questions.find(q=>q.id==="A4");
-  D=(await (await fetch("trends.json")).json())[Q.id]||{};
+  D=(await (await fetch("trends.json?v=20261125c",{cache:"no-cache"})).json())[Q.id]||{};
   sel=sel.filter(c=>D[c]);assign();render();
 })();
 window.addEventListener("hashchange",()=>location.reload());

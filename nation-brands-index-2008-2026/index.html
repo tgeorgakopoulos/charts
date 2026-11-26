@@ -162,8 +162,9 @@ const status=(c,y)=>S[c][y]!=null?S[c][y]:(DATA.years[y].full?"·":"–");
 const DEFAULT=["Greece","United States","Italy","Türkiye"];
 let lang="el",sel=[...DEFAULT],colors={};
 const NK=8;
-function assign(){const used=new Set();const next={};for(const c of sel){if(colors[c]!=null&&!used.has(colors[c])){next[c]=colors[c];used.add(colors[c])}}
-  for(const c of sel){if(next[c]!=null)continue;let k=c==="Greece"&&!used.has(0)?0:null;if(k==null){for(let i=1;i<NK;i++)if(!used.has(i)){k=i;break}}if(k==null)k=c==="Greece"?0:1+sel.indexOf(c)%(NK-1);next[c]=k;used.add(k)}
+function assign(){const used=new Set();const next={};const FIX={"United States":0,"Türkiye":1,"Greece":4};for(const c of sel)if(FIX[c]!=null){next[c]=FIX[c];used.add(FIX[c])}
+  for(const c of sel){if(next[c]==null&&colors[c]!=null&&!used.has(colors[c])){next[c]=colors[c];used.add(colors[c])}}
+  for(const c of sel){if(next[c]!=null)continue;let k=null;if(k==null){for(let i=1;i<NK;i++)if(!used.has(i)){k=i;break}}if(k==null)k=1+sel.indexOf(c)%(NK-1);next[c]=k;used.add(k)}
   colors=next}
 const col=c=>`var(--k${colors[c]})`;
 const nm=(c,short)=>lang==="el"?((short&&EL_SHORT[c])||EL[c]||c):((short&&EN_SHORT[c])||c);
@@ -195,7 +196,7 @@ function draw(){
   const labels=[];
   for(const c of [...sel].reverse()){
     const pts=Object.keys(S[c]).map(Number).sort((a,b)=>a-b).map(y=>[y,S[c][y]]);if(!pts.length)continue;
-    const g=el("g",{});const k=col(c),hl=c==="Greece";
+    const g=el("g",{});const k=col(c),hl=c==="United States";
     for(let i=1;i<pts.length;i++){const [ya,ra]=pts[i-1],[yb,rb]=pts[i];
       el("line",{x1:X(ya),y1:Y(ra),x2:X(yb),y2:Y(rb),stroke:k,"stroke-width":hl?3.4:2.4,"stroke-dasharray":yb-ya>1?"2 5":"","stroke-linecap":"round"},g)}
     for(const [y,r] of pts)el("circle",{cx:X(y),cy:Y(r),r:hl?4.2:3.4,fill:k,stroke:"var(--bg)","stroke-width":1.5},g);
